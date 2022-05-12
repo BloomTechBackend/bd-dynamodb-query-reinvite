@@ -1,5 +1,6 @@
 package com.amazon.ata.dynamodbquery.dao;
 
+import com.amazon.ata.dynamodbquery.converter.ZonedDateTimeConverter;
 import com.amazon.ata.dynamodbquery.dao.models.EventAnnouncement;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
@@ -15,6 +16,13 @@ import javax.inject.Inject;
 public class EventAnnouncementDao {
 
     private DynamoDBMapper mapper;
+
+    // Define a constant to represent the converter for our date/time to String
+    // THIS IS NOT A REQUIREMENT FOR DYNAMODB
+    // This style is used to make it easier to change which converter we use.
+    // By making it a constant we only need to change it here for it to be changed everywhere its used
+    // Define a constant to be a ZonedDateTimeConverter object
+    private static final ZonedDateTimeConverter ZONED_DATE_TIME_CONVERTER = new ZonedDateTimeConverter();
 
     /**
      * Creates an EventDao with the given DDB mapper.
